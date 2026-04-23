@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BT Buổi 19</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="../css/output.css" />
+  </head>
+  <body>
+    <!-- <header>
+      <h1 class="text-center text-2xl py-5">Quản lý nhân viên</h1>
+    </header> -->
+    <div class="flex min-h-screen">
+      <nav
+        id="sidebar"
+        class="w-64 h-screen z-10 bg-[#7386D5] space-y-8 overflow-hidden group transition-all duration-300 shrink-0 relative"
+      >
+        <div
+          class="flex flex-col items-center justify-center px-2 py-8 bg-[#6d7fcc]"
+        >
+          <div class="w-20 h-12">
+            <img
+              src="./img/tailwindcss.png"
+              alt="logo-tailwind"
+              class="w-full h-full"
+            />
+          </div>
+          <h3
+            class="text-3xl font-semibold text-center text-white group-[.collapsed]:hidden"
+          >
+            Tailwind Sidebar
+          </h3>
+        </div>
+        <ul class="text-white text-xl cursor-pointer">
+          <li>
+            <a href="#" class="menu-active"
+              ><i class="fa-solid fa-house"></i>
+              <span class="menu-text">Home</span></a
+            >
+          </li>
+          <li>
+            <a href="#" class="menu-link"
+              ><i class="fa-solid fa-briefcase"></i>
+              <span class="menu-text">About</span></a
+            >
+          </li>
+          <li>
+            <a href="#" class="menu-link"
+              ><i class="fa-regular fa-newspaper"></i>
+              <span class="menu-text">Pages</span></a
+            >
+          </li>
+          <li>
+            <a href="#" class="menu-link"
+              ><i class="fa-solid fa-link"></i>
+              <span class="menu-text">Portfolio</span></a
+            >
+          </li>
+          <li>
+            <a href="#" class="menu-link"
+              ><i class="fa-solid fa-paperclip"></i>
+              <span class="menu-text">FAQ</span></a
+            >
+          </li>
+          <li>
+            <a href="#" class="menu-link"
+              ><i class="fa-solid fa-paper-plane"></i>
+              <span class="menu-text">Contact</span></a
+            >
+          </li>
+        </ul>
+        <div class="w-full h-px bg-[#47748b]"></div>
+        <div
+          class="flex flex-col gap-1 justify-center items-center group-[.collapsed]:hidden"
+        >
+          <a href="#" class="w-[80%] px-2 py-2 bg-white rounded text-[#7386D5]"
+            >Download source</a
+          >
+          <a href="#" class="w-[80%] px-2 py-2 bg-[#6d7fcc] rounded text-white"
+            >Back to article</a
+          >
+        </div>
+        <div
+          id="toggleBtn"
+          class="absolute bottom-0 w-full h-10 bg-[#4338CA] text-white font-semibold cursor-pointer flex items-center justify-center"
+        >
+          <i id="toggleIcon" class="fa-solid fa-angle-left"></i>
+        </div>
+      </nav>
+      <main
+        class="flex-1 bg-linear-to-r from-indigo-200 via-cyan-300 to-teal-200"
+      >
+        <!-- Danh sách nhân viên  -->
+        <section class="max-w-6xl h-fit mx-auto flex justify-center">
+          <div class="bg-white w-400 mt-20">
+            <!-- Title -->
+            <div class="flex justify-between px-5 py-3">
+              <h2 class="text-blue-500 text-3xl font-bold">
+                Danh sách nhân viên
+              </h2>
+              <button
+                id="btnThemNhanVien"
+                type="button"
+                class="bg-blue-500 w-40 h-10 rounded text-white font-semibold cursor-pointer"
+              >
+                Thêm nhân viên
+              </button>
+            </div>
+            <div class="w-full h-px bg-gray-200"></div>
+            <!-- Content -->
+            <div class="px-5 py-3 space-y-4">
+              <!-- Search box -->
+              <div class="flex justify-between">
+                <input
+                  id="searchBox"
+                  class="flex-1 p-2 border outline-none rounded-l border-gray-200 focus:border-blue-400"
+                  type="text"
+                  placeholder="Loại nhân viên"
+                />
+                <button
+                  id="filterNV"
+                  class="w-12 h-auto bg-gray-200 text-gray-600 cursor-pointer"
+                  type="button"
+                  aria-label="Tìm kiếm"
+                >
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </div>
+              <!-- Table -->
+              <table class="min-w-full border border-gray-200">
+                <thead class="text-blue-500">
+                  <tr>
+                    <th
+                      class="px-4 py-3 text-sm font-bold border-r border-gray-200 text-center"
+                    >
+                      Tài Khoản
+                    </th>
+                    <th
+                      class="px-4 py-3 text-sm font-bold border-r border-gray-200 text-center"
+                    >
+                      Họ và tên
+                    </th>
+                    <th
+                      class="px-4 py-3 text-sm font-bold border-r border-gray-200 text-center"
+                    >
+                      Email
+                    </th>
+                    <th
+                      class="px-4 py-3 text-sm font-bold border-r border-gray-200 text-center"
+                    >
+                      Ngày làm
+                    </th>
+                    <th
+                      class="px-4 py-3 text-sm font-bold border-r border-gray-200 text-center"
+                    >
+                      Chức vụ
+                    </th>
+                    <th
+                      class="px-4 py-3 text-sm font-bold border-r border-gray-200 text-center"
+                    >
+                      Tổng lương
+                    </th>
+                    <th
+                      class="px-4 py-3 text-sm font-bold border-r border-gray-200 text-center"
+                    >
+                      Xếp loại
+                    </th>
+                    <th
+                      class="px-4 py-3 text-sm font-bold border-r border-gray-200 text-center"
+                    >
+                      <i class="fa-solid fa-gear"></i
+                      ><span class="sr-only">Chỉnh sửa</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="tableDanhSachNV"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <!-- Popup thêm nhân viên -->
+    <div
+      id="popupThemNhanVien"
+      class="hidden fixed inset-0 z-50 flex items-center justify-center"
+    >
+      <!-- Overlay -->
+      <div id="overlayNV" class="absolute inset-0 bg-black/50"></div>
+      <div class="w-135 mx-auto shadow-2xl bg-white relative rounded">
+        <div class="text-center py-4">
+          <h2 class="text-4xl text-gray-700">Log In</h2>
+        </div>
+        <form id="formNhanVien" class="p-6 shadow bg-lime-50">
+          <div
+            class="p-6 space-y-4 bg-[linear-gradient(135deg,#e0fdf4_50%,#fdf2f8_50%)]"
+          >
+            <div class="flex border border-gray-200 rounded">
+              <div class="w-12 py-2 bg-gray-400 text-center">
+                <i class="fa-solid fa-user"></i>
+              </div>
+              <input
+                id="taiKhoan"
+                name="taiKhoan"
+                class="flex-1 px-3 py-2 outline-none border border-transparent focus:border-blue-500 text-gray-700 placeholder-gray-400"
+                type="text"
+                placeholder="Tài khoản"
+                required
+              />
+            </div>
+            <span id="error-taiKhoan" class="text-red-500"></span>
+            <div class="flex border border-gray-200 rounded">
+              <div class="w-12 py-2 bg-gray-400 text-center">
+                <i class="fa-solid fa-address-book"></i>
+              </div>
+              <input
+                id="hoTen"
+                name="hoTen"
+                class="flex-1 px-3 py-2 outline-none border border-transparent focus:border-blue-500 text-gray-700 placeholder-gray-400"
+                type="text"
+                placeholder="Họ và tên"
+                required
+              />
+            </div>
+            <span id="error-hoTen" class="text-red-500"></span>
+            <div class="flex border border-gray-200 rounded">
+              <div class="w-12 py-2 bg-gray-400 text-center">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <input
+                id="email"
+                name="email"
+                class="flex-1 px-3 py-2 outline-none border border-transparent focus:border-blue-500 text-gray-700 placeholder-gray-400"
+                type="email"
+                placeholder="Email"
+                required
+              />
+            </div>
+            <span id="error-email" class="text-red-500"></span>
+            <div class="flex border border-gray-200 rounded">
+              <div class="w-12 py-2 bg-gray-400 text-center">
+                <i class="fa-solid fa-key"></i>
+              </div>
+              <input
+                id="matKhau"
+                name="matKhau"
+                class="flex-1 px-3 py-2 outline-none border border-transparent focus:border-blue-500 text-gray-700 placeholder-gray-400"
+                type="text"
+                placeholder="Mật khẩu"
+                required
+              />
+            </div>
+            <span id="error-matKhau" class="text-red-500"></span>
+            <div class="flex border border-gray-200 rounded">
+              <div class="w-12 py-2 bg-gray-400 text-center">
+                <i class="fa-solid fa-calendar"></i>
+              </div>
+              <input
+                id="ngayLam"
+                name="ngayLam"
+                class="flex-1 px-3 py-2 outline-none border border-transparent focus:border-blue-500 text-gray-700 placeholder-gray-400"
+                type="date"
+                placeholder="Ngày làm"
+                required
+              />
+            </div>
+            <div class="flex border border-gray-200 rounded">
+              <div class="w-12 py-2 bg-gray-400 text-center">
+                <i class="fa-regular fa-money-bill-1"></i>
+              </div>
+              <input
+                id="luongCoBan"
+                name="luongCoBan"
+                class="flex-1 px-3 py-2 outline-none border border-transparent focus:border-blue-500 text-gray-700 placeholder-gray-400"
+                type="text"
+                placeholder="Lương cơ bản"
+                required
+              />
+            </div>
+            <span id="error-luongCoBan" class="text-red-500"></span>
+            <div class="flex border border-gray-200 rounded">
+              <div class="w-12 py-2 bg-gray-400 text-center">
+                <i class="fa-solid fa-briefcase"></i>
+              </div>
+              <select
+                aria-label="Chọn chức vụ nhân viên"
+                id="chucVu"
+                name="chucVu"
+                class="flex-1 px-3 py-2 outline-none border border-transparent focus:border-blue-500 text-gray-700 placeholder-gray-400"
+                required
+              >
+                <option value="">Chọn chức vụ</option>
+                <option value="Giám đốc">Giám đốc</option>
+                <option value="Trưởng phòng">Trưởng phòng</option>
+                <option value="Nhân viên">Nhân viên</option>
+              </select>
+            </div>
+            <span id="error-chucVu" class="text-red-500"></span>
+            <div class="flex border border-gray-200 rounded">
+              <div class="w-12 py-2 bg-gray-400 text-center">
+                <i class="fa-regular fa-clock"></i>
+              </div>
+              <input
+                id="gioLam"
+                name="gioLam"
+                class="flex-1 px-3 py-2 outline-none border border-transparent focus:border-blue-500 text-gray-700 placeholder-gray-400"
+                type="text"
+                placeholder="Giờ làm"
+                required
+              />
+            </div>
+            <span id="error-gioLam" class="text-red-500"></span>
+          </div>
+        </form>
+        <div class="w-full h-px bg-gray-200 mb-4"></div>
+        <div class="flex justify-end gap-2 p-3">
+          <button
+            id="addNhanVien"
+            class="text-lg text-white bg-green-500 p-2 rounded w-45 cursor-pointer"
+            type="button"
+          >
+            Thêm người dùng
+          </button>
+          <button
+            id="capNhat"
+            class="text-lg text-white bg-green-500 p-2 rounded w-25 cursor-pointer hidden"
+            type="button"
+          >
+            Cập nhật
+          </button>
+        </div>
+        <button
+          id="btnCloseThemNhanVien"
+          class="bg-red-500 text-white w-8 h-8 absolute top-2 right-2 cursor-pointer rounded"
+          type="button"
+          aria-label="closeThemNhanVien"
+        >
+          <i class="fa-solid fa-x"></i>
+        </button>
+      </div>
+    </div>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

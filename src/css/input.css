@@ -1,1 +1,27 @@
 @import "tailwindcss";
+
+@layer components {
+  .menu-link {
+    @apply flex items-center gap-2 py-4 px-2 text-white text-xl transition-all duration-300 hover:bg-white hover:text-[#7386D5];
+  }
+  .menu-active {
+    @apply flex items-center gap-2 py-4 px-2 text-white text-xl transition-all duration-300 bg-[#6d7fcc];
+  }
+
+  .menu-text {
+    @apply text-xl opacity-100  transition-all duration-300 ease-in-out;
+  }
+
+  .collapsed .menu-text {
+    @apply text-[15px] max-h-10 mt-1;
+  }
+
+  .collapsed .menu-link,
+  .collapsed .menu-active {
+    @apply flex-col;
+  }
+
+  .collapsed .menu-link i {
+    @apply  text-xl;
+  }
+}
